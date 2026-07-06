@@ -29,7 +29,7 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { value: 7, suffix: '+', label: 'Años de experiencia en TI' },
+  { value: 7, suffix: '+', label: 'Años de experiencia' },
   { value: 10, suffix: '+', label: 'Proyectos y desarrollos' },
   { value: 6, suffix: '', label: 'Certificaciones' },
   { value: 2, suffix: '', label: 'Idiomas · Inglés C2' },
@@ -72,7 +72,7 @@ export const EXPERIENCES: Experience[] = [
     tags: ['Genexus 18', 'SQL Server', 'Figma', 'Trello'],
   },
   {
-    role: 'Customer Success Specialist',
+    role: 'Service Technician',
     company: 'MSD Chile',
     period: 'Sep 2020 — Abr 2024',
     highlights: [
