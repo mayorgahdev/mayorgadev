@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "release": "node scripts/release.mjs",
+    "release": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/release.ps1",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:portafoliomayorgadev": "node dist/portafoliomayorgadev/server/server.mjs"
