@@ -20,18 +20,32 @@ if (-not (Test-Path (Join-Path $Dist 'index.html'))) {
 }
 
 Write-Host "> Preparando worktree temporal de la rama $Branch..."
-git fetch origin
+git fetch origin --prune
 if (Test-Path $Worktree) { git worktree remove $Worktree --force }
-git worktree add $Worktree $Branch
+
+git show-ref --verify --quiet "refs/heads/$Branch"
+$BranchExists = ($LASTEXITCODE -eq 0)
+
+if ($BranchExists) {
+    git worktree add $Worktree $Branch
+}
+else {
+    # La rama no existe: se crea huerfana (sin historial, solo contendra el build)
+    git worktree add --detach $Worktree
+}
 if ($LASTEXITCODE -ne 0) { Write-Host 'X No se pudo crear el worktree'; exit 1 }
 
 try {
     Push-Location $Worktree
 
+    if (-not $BranchExists) {
+        git checkout --orphan $Branch
+    }
+
     # Sincroniza con el remoto si la rama ya existe alla (equivalente a pull,
     # pero sin conflictos: esta rama solo contiene archivos generados)
     git ls-remote --exit-code --heads origin $Branch > $null
-    if ($LASTEXITCODE -eq 0) { git reset --hard "origin/$Branch" }
+    if ($BranchExists -and $LASTEXITCODE -eq 0) { git reset --hard "origin/$Branch" }
 
     Write-Host '> Reemplazando el contenido de la rama con dist/browser...'
     Get-ChildItem -Force | Where-Object { $_.Name -ne '.git' } | Remove-Item -Recurse -Force -Confirm:$false
@@ -42,17 +56,20 @@ try {
     Copy-Item 'index.html' '404.html'
 
     git add -A
-    if (-not (git status --porcelain)) {
-        Write-Host 'OK El build no tiene cambios respecto al ultimo release. Nada que subir.'
+    if (git status --porcelain) {
+        $Fecha = Get-Date -Format 'yyyy-MM-dd HH:mm'
+        Write-Host '> Creando commit...'
+        git commit -m "release: build $Fecha"
     }
     else {
-        $Fecha = Get-Date -Format 'yyyy-MM-dd HH:mm'
-        Write-Host '> Creando commit y subiendo a origin...'
-        git commit -m "release: build $Fecha"
-        git push -u origin $Branch
-        if ($LASTEXITCODE -ne 0) { Write-Host 'X Fallo el push'; exit 1 }
-        Write-Host "OK Release publicado en la rama $Branch."
+        Write-Host '- El build no tiene cambios; se sube el commit existente.'
     }
+
+    # Push con --force: es una rama solo de deploy, el remoto siempre se sobreescribe
+    Write-Host '> Subiendo a origin...'
+    git push -u --force origin $Branch
+    if ($LASTEXITCODE -ne 0) { Write-Host 'X Fallo el push'; exit 1 }
+    Write-Host "OK Release publicado en la rama $Branch."
 }
 finally {
     Pop-Location
