@@ -116,9 +116,7 @@ export const CERTIFICATES = [
   'Fundamentos profesionales del análisis de datos — Microsoft & LinkedIn · 2025',
   'Fundamentos profesionales de gestión de proyectos — Microsoft & LinkedIn · 2025',
   'Fundamentos profesionales en ciberseguridad — Microsoft & LinkedIn · 2025',
-  'Mediciones eléctricas en equipos industriales · 2024',
   'EF SET Certificate C2 Proficient (75/100) · 2024',
-  'Certificado en JavaScript — Udemy · 2021',
 ];
 
 export const SKILL_GROUPS: SkillGroup[] = [

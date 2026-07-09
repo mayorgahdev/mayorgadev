@@ -6,13 +6,35 @@
   --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
-  --color-brand-blue: #3b82f6;
-  --color-brand-violet: #8b5cf6;
-  --color-brand-pink: #ec4899;
+  --color-accent: #ff7a1a;
   --color-ink-950: #05050a;
-  --color-ink-900: #0a0a14;
-  --color-ink-800: #12121f;
-  --color-ink-700: #1b1b2e;
+  --color-ink-900: #0a0a0a;
+  --color-ink-800: #141414;
+  --color-ink-700: #1b1b1b;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --text: #f5f0ea;
+  --text-muted: rgba(245, 240, 234, 0.62);
+  --text-faint: rgba(245, 240, 234, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --card-bg: #141414;
+  --chip-bg: rgba(255, 255, 255, 0.05);
+  --icon-bg: rgba(255, 122, 26, 0.15);
+  --nav-bg: rgba(10, 10, 10, 0.75);
+}
+
+:root.light {
+  --bg: #ece8e1;
+  --text: #0a0a0a;
+  --text-muted: rgba(10, 10, 10, 0.62);
+  --text-faint: rgba(10, 10, 10, 0.4);
+  --border: rgba(10, 10, 10, 0.1);
+  --card-bg: #f4f1ea;
+  --chip-bg: rgba(10, 10, 10, 0.04);
+  --icon-bg: rgba(255, 122, 26, 0.12);
+  --nav-bg: rgba(236, 232, 225, 0.8);
 }
 
 html {
@@ -21,8 +43,9 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-ink-950);
-  color: #e5e5f0;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color .4s ease, color .4s ease;
 }
 
 h1, h2, h3, h4 {
@@ -30,8 +53,8 @@ h1, h2, h3, h4 {
 }
 
 ::selection {
-  background: var(--color-brand-violet);
-  color: white;
+  background: var(--color-accent);
+  color: #0a0a0a;
 }
 
 ::-webkit-scrollbar {
@@ -39,19 +62,16 @@ h1, h2, h3, h4 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-ink-950);
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-brand-blue), var(--color-brand-violet));
+  background: var(--color-accent);
   border-radius: 999px;
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, var(--color-brand-blue), var(--color-brand-violet) 55%, var(--color-brand-pink));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-accent);
 }
 
 .reveal {
@@ -91,6 +111,26 @@ h1, h2, h3, h4 {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-18px) rotate(var(--r, 0deg)); }
+}
+
+.shape {
+  position: absolute;
+  animation: floaty 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.tilt-card {
+  transform: perspective(1200px) rotateY(-8deg) rotateX(4deg);
+  transition: transform .5s ease;
+}
+
+.tilt-card:hover {
+  transform: perspective(1200px) rotateY(0deg) rotateX(0deg);
 }
 
 @keyframes marquee {

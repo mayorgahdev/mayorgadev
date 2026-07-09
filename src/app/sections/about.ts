@@ -8,23 +8,23 @@ import { RevealDirective } from '../shared/reveal.directive';
   template: `
     <section id="sobre-mi" class="relative mx-auto max-w-6xl px-5 py-24">
       <div [appReveal]="0" class="mb-14">
-        <span class="text-sm font-medium uppercase tracking-widest text-brand-violet">Sobre mí</span>
-        <h2 class="mt-2 text-3xl font-bold text-white sm:text-4xl">
-          Tecnología que <span class="text-gradient">resuelve problemas reales</span>
+        <span class="text-sm font-medium uppercase tracking-widest text-accent">Sobre mí</span>
+        <h2 class="mt-2 text-3xl font-bold sm:text-4xl">
+          Tecnología que <span class="text-accent">resuelve problemas reales</span>
         </h2>
       </div>
 
       <div class="grid gap-12 lg:grid-cols-2">
-        <div [appReveal]="100" class="space-y-5 text-white/60 leading-relaxed">
+        <div [appReveal]="100" class="space-y-5 leading-relaxed text-[var(--text-muted)]">
           <p>
-            Soy Ingeniero Informático con más de <span class="text-white/90 font-medium">7 años de experiencia</span>
+            Soy Ingeniero Informático con más de <span class="font-medium text-[var(--text)]">7 años de experiencia</span>
             en el mundo TI: desde el soporte técnico y la administración de infraestructura hasta el
             desarrollo de aplicaciones web completas.
           </p>
           <p>
-            Hoy lidero el área de soporte TI de <span class="text-white/90 font-medium">AKVA Group Chile</span>, donde además
+            Hoy lidero el área de soporte TI de <span class="font-medium text-[var(--text)]">AKVA Group Chile</span>, donde además
             de administrar redes y sistemas, desarrollo plataformas internas con
-            <span class="text-white/90 font-medium">Angular y .NET</span> que digitalizan procesos de la compañía.
+            <span class="font-medium text-[var(--text)]">Angular y .NET</span> que digitalizan procesos de la compañía.
           </p>
           <p>
             He participado en proyectos internacionales y pasantías, aprendiendo de planificación,
@@ -33,11 +33,11 @@ import { RevealDirective } from '../shared/reveal.directive';
           </p>
 
           <div class="pt-4">
-            <h3 class="mb-4 font-display text-lg font-semibold text-white">Certificaciones</h3>
+            <h3 class="mb-4 font-display text-lg font-semibold">Certificaciones</h3>
             <ul class="space-y-2.5">
               @for (cert of certificates; track cert) {
                 <li class="flex items-start gap-3 text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-brand-blue" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd" />
                   </svg>
                   <span>{{ cert }}</span>
@@ -52,38 +52,14 @@ import { RevealDirective } from '../shared/reveal.directive';
             @for (stat of stats; track stat.label; let i = $index) {
               <div
                 [appReveal]="i * 100"
-                class="group rounded-2xl border border-white/10 bg-ink-800/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-violet/40 hover:shadow-xl hover:shadow-brand-violet/10"
+                class="group rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/10"
               >
-                <div class="font-display text-4xl font-bold text-gradient">
+                <div class="font-display text-4xl font-bold text-accent">
                   {{ displayed()[i] }}{{ stat.suffix }}
                 </div>
-                <div class="mt-2 text-sm text-white/50">{{ stat.label }}</div>
+                <div class="mt-2 text-sm text-[var(--text-muted)]">{{ stat.label }}</div>
               </div>
             }
-          </div>
-
-          <div [appReveal]="400" class="mt-5 rounded-2xl border border-white/10 bg-gradient-to-br from-brand-blue/10 via-brand-violet/10 to-brand-pink/10 p-6">
-            <h3 class="font-display font-semibold text-white">Idiomas</h3>
-            <div class="mt-4 space-y-4">
-              <div>
-                <div class="mb-1.5 flex justify-between text-sm">
-                  <span class="text-white/80">Español</span>
-                  <span class="text-white/40">Nativo</span>
-                </div>
-                <div class="h-1.5 overflow-hidden rounded-full bg-white/10">
-                  <div class="h-full w-full rounded-full bg-gradient-to-r from-brand-blue to-brand-violet"></div>
-                </div>
-              </div>
-              <div>
-                <div class="mb-1.5 flex justify-between text-sm">
-                  <span class="text-white/80">Inglés</span>
-                  <span class="text-white/40">C2 Proficient · EF SET 75/100</span>
-                </div>
-                <div class="h-1.5 overflow-hidden rounded-full bg-white/10">
-                  <div class="h-full w-[93%] rounded-full bg-gradient-to-r from-brand-violet to-brand-pink"></div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
