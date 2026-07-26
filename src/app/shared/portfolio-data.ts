@@ -18,6 +18,7 @@ export interface Project {
   description: string;
   tags: string[];
   link?: string;
+  image?: string;
   featured?: boolean;
   placeholder?: boolean;
 }
@@ -164,13 +165,17 @@ export const PROJECTS: Project[] = [
       'Plataforma web de pedidos para servicios internos de AKVA Group Chile: los colaboradores generan pedidos de servicios (almuerzos, gas y más) con reglas de negocio, fechas de cierre y flujos por servicio. Frontend construido íntegramente con Angular y CSS puro; backend en .NET.',
     tags: ['Angular', 'CSS', '.NET', 'SPA', 'Responsive'],
     link: 'https://akvaservicios.akvaproveedores.cl/',
+    image: 'projects/akva.png',
     featured: true,
   },
   {
-    title: 'Próximo proyecto',
-    description: 'Un nuevo desarrollo se está gestando. Pronto habrá más detalles aquí.',
-    tags: ['Próximamente'],
-    placeholder: true,
+    title: 'Burnout',
+    description:
+      'Un roguelike de cubículos: gestioná energía, estrés y tareas de oficina jugando cartas en un mazo que evoluciona día a día. Desarrollado con Angular.',
+    tags: ['Angular', 'TypeScript', 'Roguelike', 'Juego de cartas'],
+    link: 'https://mayorgahdev.github.io/burnout-game/',
+    image: 'projects/burnout.png',
+    featured: true,
   },
   {
     title: 'Próximo proyecto',
